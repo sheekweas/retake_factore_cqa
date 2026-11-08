@@ -1,0 +1,1 @@
+"""CQA local prototype server."""

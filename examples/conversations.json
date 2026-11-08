@@ -1,0 +1,20 @@
+{
+  "dataset_group_id": "SYNTHETIC_DEMO",
+  "records": [
+    {"conversation_id": "demo-ru", "channel": "agent chat", "language": "RU", "audio_url": null, "label": "демонстрационный пример, не официальный чек-лист", "transcript": [
+      {"timestamp": "00:00", "speaker": "system", "text": "Синтетический диалог для демонстрации."},
+      {"timestamp": "00:01", "speaker": "bot", "text": "Здравствуйте! Соединяю с оператором."},
+      {"timestamp": "00:03", "speaker": "client", "text": "Как посмотреть историю операций?"},
+      {"timestamp": "00:05", "speaker": "operator", "text": "Здравствуйте! Откройте раздел История в приложении и выберите нужный период."}
+    ]},
+    {"conversation_id": "demo-kz", "channel": "agent chat", "language": "KZ", "audio_url": null, "label": "демонстрационный пример, не официальный чек-лист", "transcript": [
+      {"timestamp": "00:01", "speaker": "client", "text": "Операциялар тарихын қайдан көруге болады?"},
+      {"timestamp": "00:03", "speaker": "operator", "text": "Сәлеметсіз бе! Қосымшадағы Тарих бөлімін ашып, қажетті кезеңді таңдаңыз."}
+    ]},
+    {"conversation_id": "demo-en", "channel": "agent chat", "language": "EN", "audio_url": null, "label": "демонстрационный пример, не официальный чек-лист", "transcript": [
+      {"timestamp": "00:01", "speaker": "bot", "text": "Hello! Connecting you to an operator."},
+      {"timestamp": "00:02", "speaker": "client", "text": "Where can I find my transaction history?"},
+      {"timestamp": "00:04", "speaker": "operator", "text": "Open History in the app and select a date range."}
+    ]}
+  ]
+}

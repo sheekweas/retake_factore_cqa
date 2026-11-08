@@ -1,0 +1,4 @@
+# Optional recording transcription; the core server uses Python standard library.
+faster-whisper==1.2.1
+# PyAV 19 removed metadata_errors, used by this faster-whisper decoder.
+av==16.1.0

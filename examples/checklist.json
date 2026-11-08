@@ -1,0 +1,9 @@
+{
+  "name": "демонстрационный пример, не официальный чек-лист",
+  "provenance": "demonstration",
+  "criteria": [
+    {"id": "demo-greeting", "title": "Демонстрация: оператор приветствует клиента", "type": "boolean", "weight": 1, "allow_na": false, "section": "Демонстрация", "gross_error": false},
+    {"id": "demo-clarity", "title": "Демонстрация: ясность ответа оператора по тексту", "type": "numeric", "min": 1, "max": 5, "weight": 1, "allow_na": true, "section": "Демонстрация", "gross_error": false}
+  ],
+  "rules": {"decimals": 2, "gross_error_policy": "flag"}
+}

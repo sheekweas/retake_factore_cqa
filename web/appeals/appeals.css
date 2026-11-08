@@ -1,0 +1,159 @@
+/* Appeals list and review. Scoped under .cqa-root. Uses shared tokens from styles/app.css. */
+.cqa-root [hidden] { display: none !important; }
+.cqa-root .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------------- List ---------------- */
+.cqa-root .tabs { display: inline-flex; gap: 2px; margin: 4px 0 14px; padding: 3px; background: var(--surface-2, var(--bg)); border: 1px solid var(--border); border-radius: var(--radius, 8px); flex-wrap: wrap; }
+.cqa-root .tab { border: 1px solid transparent; background: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font: inherit; font-size: 13px; color: var(--muted); }
+.cqa-root .tab:hover { color: var(--text); }
+.cqa-root .tab.active { background: var(--panel); border-color: var(--border); color: var(--text); font-weight: 600; box-shadow: var(--shadow-sm, none); }
+
+.cqa-root .appeals-table-wrap { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); overflow: hidden; }
+.cqa-root .appeals-table { margin: 0; }
+.cqa-root .appeals-table td { vertical-align: middle; }
+.cqa-root .appeals-table .appeal-date { white-space: nowrap; color: var(--muted); font-size: 13px; }
+.cqa-root .appeals-table .appeal-comment { max-width: 320px; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 13px; display: table-cell; }
+.cqa-root .appeals-table tr.is-pending td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
+.cqa-root .appeal-crit { font-weight: 600; line-height: 1.35; }
+.cqa-root .appeal-conv { font-family: var(--font-mono, ui-monospace, Consolas, monospace); color: var(--muted); }
+.cqa-root .appeal-answer-change { display: flex; align-items: center; gap: 6px; flex-wrap: nowrap; white-space: nowrap; }
+.cqa-root .appeal-status-cell { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+.cqa-root .appeal-decision { font-size: 13px; }
+.cqa-root .appeal-action { text-align: right; white-space: nowrap; }
+.cqa-root .crit-num { font-family: var(--font-mono, ui-monospace, Consolas, monospace); font-size: 12px; font-weight: 600; color: var(--muted); background: var(--surface-2, var(--bg)); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; }
+.cqa-root .pill-was .score-pill { text-decoration: line-through; opacity: .7; font-weight: 500; }
+.cqa-root .val-was { color: var(--muted); text-decoration: line-through; }
+
+@media (max-width: 760px) {
+  .cqa-root .appeals-table-wrap { border: none; background: none; overflow: visible; }
+  .cqa-root .appeals-table, .cqa-root .appeals-table tbody, .cqa-root .appeals-table tr, .cqa-root .appeals-table td { display: block; width: 100%; background: none; }
+  .cqa-root .appeals-table thead { display: none; }
+  .cqa-root .appeals-table tr { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); padding: 10px 12px; margin-bottom: 10px; }
+  .cqa-root .appeals-table tr.is-pending { border-left: 3px solid var(--warn); }
+  .cqa-root .appeals-table tr.is-pending td:first-child { box-shadow: none; }
+  .cqa-root .appeals-table td { border: none; padding: 3px 0; }
+  .cqa-root .appeals-table td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .cqa-root .appeals-table .appeal-comment { max-width: none; display: block; }
+  .cqa-root .appeals-table .appeal-action { text-align: left; padding-top: 6px; }
+  .cqa-root .appeal-status-cell { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; }
+}
+
+/* ---------------- Review ---------------- */
+.cqa-root .appeal-header { margin-bottom: 12px; }
+.cqa-root .appeal-title { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.cqa-root .appeal-title h1 { margin: 0; overflow-wrap: anywhere; }
+.cqa-root .appeal-title h1 .crit-num { font-size: 14px; vertical-align: 3px; }
+.cqa-root .appeal-meta { display: flex; gap: 6px 12px; flex-wrap: wrap; align-items: center; margin-top: 6px; color: var(--muted); font-size: 13px; }
+
+.cqa-root .appeal-steps { list-style: none; margin: 0 0 var(--gap, 12px); padding: 12px 16px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); counter-reset: step; }
+.cqa-root .appeal-step { display: flex; gap: 10px; align-items: flex-start; counter-increment: step; position: relative; min-width: 0; }
+.cqa-root .step-dot { flex: none; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; border: 2px solid var(--border-strong, var(--border)); color: var(--muted); background: var(--panel); }
+.cqa-root .step-dot::before { content: counter(step); }
+.cqa-root .step-done .step-dot { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.cqa-root .step-current .step-dot { border-color: var(--warn); color: var(--warn); background: var(--warn-weak); }
+.cqa-root .step-body { display: flex; flex-direction: column; min-width: 0; }
+.cqa-root .step-label { font-weight: 600; font-size: 13px; }
+.cqa-root .step-todo .step-label { color: var(--muted); }
+.cqa-root .step-detail { font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+@media (max-width: 560px) { .cqa-root .appeal-steps { grid-template-columns: 1fr; gap: 8px; } }
+
+.cqa-root .appeal-top-grid { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: var(--gap, 12px); align-items: start; }
+@media (max-width: 900px) { .cqa-root .appeal-top-grid { grid-template-columns: minmax(0, 1fr); } }
+.cqa-root .appeal-comment-panel h2, .cqa-root .decision-panel h2, .cqa-root .appeal-compare h2 { margin: 0 0 8px; font-size: 15px; }
+.cqa-root .appeal-comment-text, .cqa-root .pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+.cqa-root .appeal-comment-text { padding: 10px 12px; border-left: 3px solid var(--accent); background: var(--surface-2, var(--bg)); border-radius: 0 var(--radius, 8px) var(--radius, 8px) 0; }
+
+.cqa-root .appeal-compare { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--gap, 12px); }
+@media (max-width: 1000px) { .cqa-root .appeal-compare { grid-template-columns: minmax(0, 1fr); } }
+.cqa-root .appeal-compare .panel { min-width: 0; }
+.cqa-root .panel-original { background: var(--surface-2, var(--bg)); }
+.cqa-root .panel-original h2 { color: var(--muted); }
+.cqa-root .panel-original.is-superseded .total-line strong { color: var(--muted); text-decoration: line-through; font-weight: 600; }
+.cqa-root .panel-final { border-color: var(--accent); box-shadow: inset 0 3px 0 var(--accent); }
+.cqa-root .panel-final .total-line strong { color: var(--accent-strong, var(--accent)); font-size: 20px; }
+.cqa-root .total-line { margin: 4px 0 10px; display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+.cqa-root .total-line strong { font-size: 18px; font-variant-numeric: tabular-nums; }
+
+/* Dialog fragment */
+.cqa-root .fragment-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.cqa-root .fragment-msg { padding: 6px 10px; border: 1px solid var(--border); border-left-width: 3px; border-radius: var(--radius, 8px); min-width: 0; }
+.cqa-root .fragment-msg.msg-operator { border-left-color: var(--operator); }
+.cqa-root .fragment-msg.msg-client { border-left-color: var(--client); }
+.cqa-root .fragment-msg.msg-bot { border-left-color: var(--bot); }
+.cqa-root .fragment-msg.msg-system { border-left-color: var(--system); color: var(--muted); }
+.cqa-root .fragment-msg.is-key { background: var(--warn-weak); border-color: var(--warn); border-left-width: 3px; }
+.cqa-root .fragment-msg.is-key.msg-operator { border-left-color: var(--operator); }
+.cqa-root .fragment-gap { font-size: 12px; padding-left: 10px; }
+.cqa-root .fragment-msg .msg-head { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cqa-root .fragment-msg .msg-head a { margin-left: auto; }
+.cqa-root .fragment-msg .msg-ts { font-family: var(--font-mono, ui-monospace, Consolas, monospace); font-size: 11px; color: var(--muted); }
+.cqa-root .fragment-msg .msg-text { white-space: pre-wrap; overflow-wrap: anywhere; }
+
+/* Decision */
+.cqa-root .decision-panel { border-color: var(--accent); }
+.cqa-root .decision-head { display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+.cqa-root .decision-badge { font-size: 13px; font-weight: 600; padding: 2px 10px; }
+.cqa-root .decision-total { margin-left: auto; font-variant-numeric: tabular-nums; }
+.cqa-root .decision-total strong { font-size: 18px; color: var(--accent-strong, var(--accent)); }
+.cqa-root .decision-reason, .cqa-root .decision-answer { margin-bottom: 10px; }
+.cqa-root .decision-reason .pre { padding: 8px 12px; background: var(--surface-2, var(--bg)); border-radius: var(--radius, 8px); border: 1px solid var(--border); }
+
+.cqa-root .review-form { display: flex; flex-direction: column; gap: 12px; }
+.cqa-root .review-form fieldset { border: 1px solid var(--border); border-radius: var(--radius, 8px); padding: 10px 12px; display: flex; flex-direction: column; gap: 10px; min-width: 0; margin: 0; }
+.cqa-root .review-form legend { font-weight: 600; padding: 0 4px; }
+.cqa-root .decision-choice { border: none !important; padding: 0 !important; }
+.cqa-root .decision-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 560px) { .cqa-root .decision-options { grid-template-columns: minmax(0, 1fr); } }
+.cqa-root .decision-option { display: flex; gap: 10px; align-items: flex-start; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius, 8px); cursor: pointer; background: var(--panel); }
+.cqa-root .decision-option:hover { border-color: var(--border-strong, var(--accent)); }
+.cqa-root .decision-option:has(input:checked) { border-color: var(--accent); background: var(--accent-weak); }
+.cqa-root .decision-option input { margin-top: 3px; }
+.cqa-root .decision-option-body { display: flex; flex-direction: column; }
+.cqa-root .decision-option-label { font-weight: 600; }
+.cqa-root .radio { display: inline-flex; align-items: center; gap: 4px; margin-right: 12px; flex-wrap: wrap; }
+.cqa-root .radio select { max-width: 100%; min-width: 0; }
+.cqa-root .value-option { display: flex; width: 100%; margin-right: 0; }
+.cqa-root .value-option select { flex: 1 1 220px; width: 100%; text-overflow: ellipsis; }
+.cqa-root .ev-list { max-height: 260px; overflow: auto; border: 1px solid var(--border); border-radius: var(--radius, 8px); padding: 4px 8px; display: flex; flex-direction: column; gap: 2px; }
+.cqa-root .ev-option { display: flex; gap: 6px; align-items: baseline; font-size: 13px; padding: 2px 0; }
+.cqa-root .ev-option .msg-ts { font-family: var(--font-mono, ui-monospace, Consolas, monospace); font-size: 11px; color: var(--muted); }
+.cqa-root .ev-text { flex: 1; overflow-wrap: anywhere; min-width: 0; }
+.cqa-root .span-row select { max-width: 280px; }
+@media (max-width: 560px) { .cqa-root .span-row select { max-width: 100%; } .cqa-root .ev-option { flex-wrap: wrap; } }
+
+/* ---------------- Responsive refinements ---------------- */
+.cqa-root .appeals-table-wrap { box-shadow: var(--shadow-sm); }
+.cqa-root .appeal-conv, .cqa-root .appeal-meta a, .cqa-root .fragment-msg .msg-head a { overflow-wrap: anywhere; min-width: 0; }
+.cqa-root .fragment-msg .msg-ts, .cqa-root .ev-option .msg-ts { white-space: nowrap; font-variant-numeric: tabular-nums; }
+.cqa-root .ev-option code { overflow-wrap: anywhere; }
+.cqa-root .review-form textarea, .cqa-root .review-form select { max-width: 100%; }
+@media (max-width: 900px) {
+  .cqa-root .appeals-table-wrap { border: none; background: none; overflow: visible; box-shadow: none; }
+  .cqa-root .appeals-table, .cqa-root .appeals-table tbody, .cqa-root .appeals-table tr, .cqa-root .appeals-table td { display: block; width: 100%; background: none; }
+  .cqa-root .appeals-table thead { display: none; }
+  .cqa-root .appeals-table tr { background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius-lg, 12px); padding: 12px 14px; margin-bottom: 10px; box-shadow: var(--shadow-sm); }
+  .cqa-root .appeals-table tr.is-pending { border-left: 3px solid var(--warn); }
+  .cqa-root .appeals-table tr.is-pending td:first-child { box-shadow: none; }
+  .cqa-root .appeals-table td { border: none; padding: 4px 0; }
+  .cqa-root .appeals-table td[data-label]::before { content: attr(data-label); display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .cqa-root .appeals-table .appeal-comment { max-width: none; display: block; }
+  .cqa-root .appeals-table .appeal-action { text-align: left; padding-top: 8px; }
+  .cqa-root .appeal-status-cell { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 6px; }
+  .cqa-root .appeals-table tbody tr:hover td { background: none; }
+}
+@media (max-width: 560px) {
+  .cqa-root .tabs { display: flex; width: 100%; }
+  .cqa-root .tabs .tab { flex: 1 1 auto; min-height: 40px; }
+  .cqa-root .appeals-table .appeal-action .btn { width: 100%; min-height: 40px; }
+  .cqa-root .review-form .btn { min-height: 40px; }
+  .cqa-root .decision-option { min-height: 44px; }
+  .cqa-root .decision-total { margin-left: 0; }
+  .cqa-root .fragment-msg .msg-head a { margin-left: 0; flex-basis: 100%; }
+  .cqa-root .ev-list { max-height: 320px; }
+  .cqa-root .ev-option { display: grid; grid-template-columns: 22px auto auto minmax(0, 1fr); align-items: center; gap: 2px 8px; padding: 6px 0; border-bottom: 1px solid var(--border); }
+  .cqa-root .ev-option:last-child { border-bottom: none; }
+  .cqa-root .ev-option input { min-height: 0; }
+  .cqa-root .ev-option code { justify-self: end; }
+  .cqa-root .ev-option .ev-text { grid-column: 2 / -1; grid-row: 2; }
+  .cqa-root .span-row select, .cqa-root .value-option select { width: 100%; flex-basis: 100%; }
+}
